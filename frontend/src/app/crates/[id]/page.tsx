@@ -114,6 +114,7 @@ export default function RslPredictionHeroPage({
     annotated_frame_url: string;
     heatmap_url: string;
     cv_metrics: any;
+    arrhenius_k?: number;
   } | null>(null);
 
   const [activeFrameUrl, setActiveFrameUrl] = useState<string>(

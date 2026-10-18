@@ -43,6 +43,7 @@ export const LiveCameraTestSection: React.FC = () => {
   const [activeStage, setActiveStage] = useState<number>(0);
   const [apiResult, setApiResult] = useState<any>(null);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [customImageUrl, setCustomImageUrl] = useState<string>("");
 
   const handleRunAnalysis = async () => {
     setIsProcessing(true);
