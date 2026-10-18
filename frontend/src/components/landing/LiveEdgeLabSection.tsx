@@ -194,10 +194,11 @@ export function LiveEdgeLabSection() {
     });
 
     try {
-      await fetch("/api/crates/AF-CRATE-0481/actions/fire", {
+      await fetch("/api/actions/fire", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          crate_id: "AF-CRATE-0481",
           action_type: "ESL_MARKDOWN",
           custom_markdown_price: kinetics.markdownPrice,
         }),

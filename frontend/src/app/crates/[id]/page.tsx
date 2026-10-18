@@ -292,10 +292,11 @@ export default function RslPredictionHeroPage({
   const handleDispatchAction = async () => {
     setActionDispatched(true);
     try {
-      await fetch(`/api/crates/${crateIdParam || "AF-CRATE-0481"}/actions/fire`, {
+      await fetch("/api/actions/fire", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          crate_id: crateIdParam || "AF-CRATE-0481",
           action_type: "ESL_MARKDOWN",
           custom_markdown_price: liveData?.markdown_price_inr || 56.0,
         })
