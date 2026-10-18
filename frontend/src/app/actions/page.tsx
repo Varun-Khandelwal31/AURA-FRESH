@@ -203,7 +203,7 @@ export default function ActionCenterHeroPage() {
 
   const handleApprove = async (id: string, produce: string) => {
     try {
-      await fetch(`http://localhost:8000/api/actions/${id}/approve`, {
+      await fetch(`/api/actions/${id}/approve`, {
         method: "POST",
       });
     } catch {

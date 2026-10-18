@@ -207,8 +207,8 @@ export default function StoreDashboardPage() {
     setScanningCrateId(crateRawId);
     
     try {
-      // Connect to live FastAPI backend if available
-      const res = await fetch("http://localhost:8000/api/predict", {
+      // Connect to live API endpoint
+      const res = await fetch("/api/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

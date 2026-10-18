@@ -8,25 +8,19 @@ import { FreshnessCard3D } from "../components/landing/FreshnessCard3D";
 import { StatStrip } from "../components/landing/StatStrip";
 import { InvisibleWindow3DSection } from "../components/landing/InvisibleWindow3DSection";
 import { EdgePipelineSection } from "../components/landing/EdgePipelineSection";
-import { LiveSimulatorSection } from "../components/landing/LiveSimulatorSection";
-import { LiveCameraTestSection } from "../components/landing/LiveCameraTestSection";
-import { LiveTelemetrySection } from "../components/landing/LiveTelemetrySection";
+import { LiveEdgeLabSection } from "../components/landing/LiveEdgeLabSection";
+import { LiveModulesGrid } from "../components/landing/LiveModulesGrid";
 import { FooterLanding } from "../components/landing/FooterLanding";
-import { ArrowRight, Eye, ShieldCheck, Sparkles, Store, Zap } from "lucide-react";
+import { ArrowRight, Eye, Sparkles, Store } from "lucide-react";
 
 export default function LandingPage() {
   return (
     <div className="relative min-h-screen flex flex-col bg-[#F8FAFC] text-[#475569] font-sans overflow-x-hidden selection:bg-[#D1FAE5] selection:text-[#064E3B]">
       
-      {/* Background Mesh Gradient + Dot-Grid Pattern + Ambient Glows */}
+      {/* Background Mesh Gradient + Ambient Glows */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Subtle mesh background underlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#059669]/[0.03] via-transparent to-[#D1FAE5]/20" />
-        
-        {/* Faint dot-grid pattern (1px dots, 32px spacing, 6% opacity) */}
         <div className="absolute inset-0 dot-grid-pattern opacity-60" />
-
-        {/* Ambient blurred radial orbs */}
         <div className="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full bg-[#059669]/10 blur-[140px]" />
         <div className="absolute top-[40%] -right-32 w-[600px] h-[600px] rounded-full bg-[#F59E0B]/10 blur-[150px]" />
         <div className="absolute top-[80%] left-1/4 w-[500px] h-[500px] rounded-full bg-[#10B981]/10 blur-[130px]" />
@@ -35,17 +29,17 @@ export default function LandingPage() {
       {/* Floating Glassmorphic Navbar */}
       <Navbar />
 
-      {/* 1. HERO SECTION (two-column 60/40, perspective-enabled 3D card) */}
-      <section className="relative z-10 pt-28 pb-16 sm:pt-36 sm:pb-24">
+      {/* 1. HERO SECTION (clean two-column 60/40 with tactile 3D freshness stamp card) */}
+      <section className="relative z-10 pt-28 pb-16 sm:pt-36 sm:pb-20">
         <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
             
-            {/* LEFT COLUMN — copy stack (60% / 7 cols) */}
+            {/* LEFT COLUMN — copy stack */}
             <div className="lg:col-span-7">
               <HeroCopy />
             </div>
 
-            {/* RIGHT COLUMN — 3D interactive freshness card (40% / 5 cols) */}
+            {/* RIGHT COLUMN — 3D interactive freshness card */}
             <div className="lg:col-span-5 flex justify-center lg:justify-end">
               <FreshnessCard3D />
             </div>
@@ -54,40 +48,34 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 2. STAT STRIP (below hero, subtle key retail metrics) */}
+      {/* 2. STAT STRIP (key retail metrics) */}
       <section className="relative z-10 border-y border-[#E2E8F0]/80 bg-white/40 backdrop-blur-sm">
         <StatStrip />
       </section>
 
-      {/* 3. 3D INVISIBLE WINDOW TIMELINE SECTION (Day slider + spatial perspective) */}
-      <section className="relative z-10 py-20 bg-gradient-to-b from-transparent via-white/50 to-transparent">
+      {/* 3. 3D INVISIBLE WINDOW TIMELINE (interactive Day 0-10 scrub slider) */}
+      <section className="relative z-10 py-16 bg-gradient-to-b from-transparent via-white/50 to-transparent">
         <InvisibleWindow3DSection />
       </section>
 
-      {/* 4. EDGE AI & PHYSICAL ARRHENIUS PIPELINE (3D tilt cards) */}
-      <section className="relative z-10 py-20">
+      {/* 4. UNIFIED LIVE EDGE VISION & ARRHENIUS KINETICS LAB (Clean, zero clutter, 100% interactive) */}
+      <section id="live-lab" className="relative z-10 py-16 bg-[#F1F5F9]/40 border-y border-[#E2E8F0]">
+        <LiveEdgeLabSection />
+      </section>
+
+      {/* 5. EDGE PIPELINE (Sense -> Predict -> Act) */}
+      <section className="relative z-10 py-16">
         <EdgePipelineSection />
       </section>
 
-      {/* 5. INTERACTIVE LIVE SIMULATOR (Live physics & chiller workbench) */}
-      <section className="relative z-10 py-20 bg-[#F1F5F9]/40 border-y border-[#E2E8F0]">
-        <LiveSimulatorSection />
+      {/* 6. LIVE AURAFRESH MODULES GRID (Clean direct navigation) */}
+      <section className="relative z-10 py-16 bg-white/60 border-t border-[#E2E8F0]">
+        <LiveModulesGrid />
       </section>
 
-      {/* 6. LIVE OPTICAL CAMERA RIG & INFERENCE (Real FastAPI /api/predict execution) */}
-      <section className="relative z-10 py-20">
-        <LiveCameraTestSection />
-      </section>
-
-      {/* 7. REAL-TIME STREAMING ACTION BUS (Live recovery & dispatch events) */}
-      <section className="relative z-10 py-20 bg-white/70 border-y border-[#E2E8F0]">
-        <LiveTelemetrySection />
-      </section>
-
-      {/* 8. READY TO DEPLOY SECTION (Direct link to live store apps) */}
-      <section className="relative z-10 py-24 px-4 sm:px-6 lg:px-8 text-center max-w-5xl mx-auto">
+      {/* 7. READY TO DEPLOY CTA SECTION */}
+      <section className="relative z-10 py-20 px-4 sm:px-6 lg:px-8 text-center max-w-5xl mx-auto">
         <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#064E3B] to-[#043327] text-white shadow-[0_20px_50px_rgba(6,78,59,0.3)] relative overflow-hidden">
-          {/* Subtle decorative glow */}
           <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#10B981]/20 blur-[90px] pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-[#059669]/20 blur-[90px] pointer-events-none" />
 
