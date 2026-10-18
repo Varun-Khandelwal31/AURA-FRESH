@@ -3,6 +3,12 @@
 > **"Not another dashboard. Confidence + action."**  
 > *Zero New Hardware · Pre-Visual Cellular Decay Detection · Closed-Loop Retail Automation*
 
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-Live%20Demo-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://frontend-six-phi-88.vercel.app)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Varun--Khandelwal31%2FAURA--FRESH-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Varun-Khandelwal31/AURA-FRESH)
+
+🌐 **Live Application**: [https://frontend-six-phi-88.vercel.app](https://frontend-six-phi-88.vercel.app)  
+🔬 **Live Crate & RSL Prediction**: [https://frontend-six-phi-88.vercel.app/crates/AF-CRATE-0481](https://frontend-six-phi-88.vercel.app/crates/AF-CRATE-0481)
+
 ---
 
 ## 🌟 Overview
