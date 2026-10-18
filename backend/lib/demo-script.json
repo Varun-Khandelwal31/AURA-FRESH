@@ -1,0 +1,91 @@
+[
+  {
+    "stage": "sense",
+    "status": "in_progress",
+    "timestamp": "14:31:01 IST",
+    "message": "Optical overhead camera reading frame · analyzing ₹100 neutral-density calibration tile...",
+    "data": {
+      "tile_delta_e": 0.42,
+      "calibration_status": "LOCKED",
+      "frame_ambient_lux": 420
+    }
+  },
+  {
+    "stage": "sense",
+    "status": "done",
+    "timestamp": "14:31:02 IST",
+    "message": "SENSE complete: AE drift measured at 0.42 (2.3× above 0.18 baseline). Inbound reefer chiller avg: 8.0°C (flagged amber).",
+    "data": {
+      "ae_drift": 0.42,
+      "temp_history": 8.0,
+      "baseline_ae": 0.18,
+      "drift_ratio": 2.33
+    }
+  },
+  {
+    "stage": "predict",
+    "status": "in_progress",
+    "timestamp": "14:31:03 IST",
+    "message": "Fusing AE photometric drift with Arrhenius activation energy (Ea = 62.5 kJ/mol) for Solanum lycopersicum...",
+    "data": {
+      "species": "Solanum lycopersicum",
+      "model": "Arrhenius-Kinetic-Fusion-V2",
+      "historical_priors": "1,240 reference crates"
+    }
+  },
+  {
+    "stage": "predict",
+    "status": "done",
+    "timestamp": "14:31:04 IST",
+    "message": "PREDICT complete: RSL = 3.2 ± 0.8 days. Freshness Grade: B+. Confidence = 78% (above 70% auto-fire threshold).",
+    "data": {
+      "rsl": "3.2 ± 0.8 days",
+      "rsl_days": 3.2,
+      "rsl_uncertainty": 0.8,
+      "confidence": 0.78,
+      "grade": "B+",
+      "invisible_window_days": 4
+    }
+  },
+  {
+    "stage": "decide",
+    "status": "done",
+    "timestamp": "14:31:05 IST",
+    "message": "DECIDE complete: Deterministic rule fired for RSL 3.2 days → 30% markdown (medium priority).",
+    "data": {
+      "action": {
+        "type": "markdown",
+        "label": "30% markdown",
+        "priority": "medium",
+        "original_price": 80.0,
+        "markdown_price": 56.0,
+        "recovered_value_inr": 640.0
+      }
+    }
+  },
+  {
+    "stage": "act",
+    "status": "done",
+    "timestamp": "14:31:06 IST",
+    "message": "ACT complete: Confidence 78% ≥ 70% → Auto-fired to ESL-TOM-04A and WhatsApp loyalty shoppers without human bottleneck.",
+    "data": {
+      "auto_fired": true,
+      "channel": "ESL_AND_WHATSAPP",
+      "tag_id": "ESL-TOM-04A",
+      "status": "EXECUTED",
+      "recovered_value_inr": 640.0,
+      "diverted_food_kg": 26.7
+    }
+  },
+  {
+    "stage": "learn",
+    "status": "done",
+    "timestamp": "14:31:07 IST",
+    "message": "LEARN complete: Elasticity curve retrained · case indexed into ESG audit ledger for India BRSR & UN SDG 12.3.",
+    "data": {
+      "feedback_stored": true,
+      "audit_hash": "AF-CASE-0481-HASH-78A",
+      "esg_logged": true
+    }
+  }
+]
