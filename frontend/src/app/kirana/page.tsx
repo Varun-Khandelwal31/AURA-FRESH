@@ -108,6 +108,12 @@ const INITIAL_KIRANA_ACTIONS: KiranaAction[] = [
 
 export default function KiranaMobilePage() {
   const [actions, setActions] = useState<KiranaAction[]>(INITIAL_KIRANA_ACTIONS);
+  const [toastMsg, setToastMsg] = useState<string | null>(null);
+
+  const showToast = (msg: string) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(null), 4000);
+  };
 
   const handleApprove = async (id: string) => {
     setActions((prev) =>
@@ -138,6 +144,7 @@ export default function KiranaMobilePage() {
         colors: ["#10B981", "#059669", "#F59E0B"],
       });
     } catch (e) {}
+    showToast("✓ All pending crate actions approved and dispatched to store floor.");
   };
 
   return (
@@ -309,7 +316,7 @@ export default function KiranaMobilePage() {
 
             {/* Ghost slate button */}
             <button
-              onClick={() => alert("Actions deferred for 30 minutes")}
+              onClick={() => showToast("⏳ Manual reviews snoozed for 30 minutes. Autonomous actions (≥70%) continue running.")}
               className="px-2 py-2 rounded-full border border-[#CBD5E1] text-[#475569] hover:bg-slate-50 text-xs font-medium text-center transition-colors active:scale-95"
             >
               Defer
@@ -317,13 +324,20 @@ export default function KiranaMobilePage() {
 
             {/* Ghost slate button */}
             <button
-              onClick={() => alert("Optical scan requested for camera bay")}
+              onClick={() => showToast("📷 High-resolution optical scan dispatched to CCTV Bay 4.")}
               className="px-2 py-2 rounded-full border border-[#CBD5E1] text-[#475569] hover:bg-slate-50 text-xs font-medium text-center transition-colors active:scale-95"
             >
               Re-scan crates
             </button>
           </div>
         </div>
+
+        {/* Floating Toast Notification */}
+        {toastMsg && (
+          <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 px-4 py-2.5 rounded-full bg-[#064E3B] text-white text-xs font-medium shadow-2xl border border-emerald-400/30 flex items-center gap-2 animate-fade-in max-w-[90vw]">
+            <span>{toastMsg}</span>
+          </div>
+        )}
 
       </div>
 

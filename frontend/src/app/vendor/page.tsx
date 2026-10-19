@@ -102,9 +102,16 @@ export default function VendorPortalPage() {
   const [filter, setFilter] = useState<string>("all");
   const [claimsList, setClaimsList] = useState<ClaimItem[]>(CLAIMS);
   const [settledMap, setSettledMap] = useState<Record<string, boolean>>({});
+  const [toastMsg, setToastMsg] = useState<string | null>(null);
+
+  const showToast = (msg: string) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(null), 4000);
+  };
 
   const handleSettle = (id: string) => {
     setSettledMap((prev) => ({ ...prev, [id]: true }));
+    showToast("✓ Claim settled: Instant credit note issued to vendor ledger.");
   };
 
   const filteredClaims = claimsList.filter((c) => {
@@ -197,7 +204,7 @@ export default function VendorPortalPage() {
 
                 {/* "New claim" green ghost button */}
                 <button
-                  onClick={() => alert("New claim modal: Select crate and attach edge sensor audit.")}
+                  onClick={() => showToast("📋 Dispute dossier generator opened: Select crate and attach edge sensor audit.")}
                   className="px-2.5 py-1.5 rounded-md border border-[#059669] text-[#059669] hover:bg-[#D1FAE5]/40 text-xs font-semibold inline-flex items-center gap-1 transition-colors"
                 >
                   <Plus strokeWidth={2} className="w-3.5 h-3.5" />
@@ -282,7 +289,7 @@ export default function VendorPortalPage() {
                           </button>
                         ) : (
                           <button
-                            onClick={() => alert(`Reviewing evidence bundle for ${claim.crateId}`)}
+                            onClick={() => showToast(`🔍 Reviewing cryptographic evidence bundle for ${claim.crateId}`)}
                             className="px-3 py-1.5 rounded-md border border-[#059669] text-[#059669] hover:bg-[#D1FAE5]/40 text-xs font-semibold inline-flex items-center gap-1 transition-colors"
                           >
                             <span>{claim.actionText}</span>
@@ -297,19 +304,19 @@ export default function VendorPortalPage() {
                       {/* Three small chip-links showing attached evidence */}
                       <div className="flex flex-wrap items-center gap-2">
                         <button
-                          onClick={() => alert("Previewing 6 edge calibration photos")}
+                          onClick={() => showToast("📷 Previewing 6 edge calibration photos with Macbeth tile alignment")}
                           className="px-2 py-0.5 rounded bg-[#F8FAFC] border border-[#E2E8F0] text-[11px] font-mono text-[#064E3B] hover:bg-[#D1FAE5]/30 transition-colors"
                         >
                           {claim.evidencePhotos}
                         </button>
                         <button
-                          onClick={() => alert("Previewing 72-hr cold-chain log: 8.0°C excursion flagged")}
+                          onClick={() => showToast("🌡 Previewing 72-hr cold-chain reefer log: 8.0°C thermal excursion flagged")}
                           className="px-2 py-0.5 rounded bg-[#F8FAFC] border border-[#E2E8F0] text-[11px] font-mono text-[#B45309] hover:bg-amber-50 transition-colors"
                         >
                           {claim.evidenceTemp}
                         </button>
                         <button
-                          onClick={() => alert("Previewing AE reflectance drift trajectory")}
+                          onClick={() => showToast("📈 Previewing AE reflectance drift trajectory: ΔE 0.62 shift")}
                           className="px-2 py-0.5 rounded bg-[#F8FAFC] border border-[#E2E8F0] text-[11px] font-mono text-[#059669] hover:bg-[#D1FAE5]/30 transition-colors"
                         >
                           {claim.evidenceAe}
@@ -513,6 +520,13 @@ export default function VendorPortalPage() {
           </span>
         </div>
       </footer>
+
+      {/* Floating Toast Notification */}
+      {toastMsg && (
+        <div className="fixed bottom-16 left-1/2 -translate-x-1/2 z-50 px-4 py-2.5 rounded-full bg-[#064E3B] text-white text-xs font-medium shadow-2xl border border-emerald-400/30 flex items-center gap-2 animate-fade-in max-w-[90vw]">
+          <span>{toastMsg}</span>
+        </div>
+      )}
     </div>
   );
 }
