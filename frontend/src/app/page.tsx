@@ -85,7 +85,7 @@ export default function LandingPage() {
               <span>Zero New Hardware · 48-Hour Onboarding</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold tracking-tight text-white">
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold tracking-tight !text-white text-white">
               Watch the invisible window across your entire produce floor.
             </h2>
 

@@ -53,7 +53,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
             </div>
 
             {/* LOCKED TAGLINE VERBATIM ON H1 (Never paraphrased, IBM Plex Serif) */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-white leading-[1.15] font-serif">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-normal tracking-tight !text-white text-white leading-[1.15] font-serif">
               Freshness has an invisible window. <span className="text-[#10B981] italic">We watch it.</span>
             </h1>
 

@@ -28,8 +28,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: #064E3B;
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    color: #064E3B;
+  }
 }
 
 /* AuraFresh Design System Card Surface with 3D Depth */

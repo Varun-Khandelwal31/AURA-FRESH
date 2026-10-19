@@ -66,7 +66,7 @@ export const WhatsAppModal: React.FC<WhatsAppModalProps> = ({
             <Smartphone strokeWidth={1.5} className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-white">
+            <h3 className="text-base font-bold text-white !text-white">
               Twilio WhatsApp Sandbox Dispatch
             </h3>
             <p className="text-xs text-[#8b9bb4]">

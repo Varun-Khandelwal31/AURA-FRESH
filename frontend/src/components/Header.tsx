@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { 
@@ -13,8 +13,10 @@ import {
   Smartphone,
   Truck,
   Layers,
-  ArrowRight
+  ArrowRight,
+  Award
 } from "lucide-react";
+import { TechfestJudgeModal } from "./TechfestJudgeModal";
 
 interface HeaderProps {
   onResetDemo?: () => void;
@@ -26,6 +28,7 @@ export const Header: React.FC<HeaderProps> = ({
   isResetting = false,
 }) => {
   const pathname = usePathname();
+  const [isJudgeModalOpen, setIsJudgeModalOpen] = useState(false);
 
   const handleReset = async () => {
     if (onResetDemo) {
@@ -42,12 +45,12 @@ export const Header: React.FC<HeaderProps> = ({
 
   const navLinks = [
     { href: "/", label: "Landing" },
-    { href: "/store", label: "Store Hub", badge: "P0" },
-    { href: "/crates/AF-CRATE-0481", label: "RSL Prediction", badge: "Hero #1" },
-    { href: "/actions", label: "Action Center", badge: "Hero #2" },
-    { href: "/invisible-window", label: "Invisible Window", badge: "Hero #3" },
-    { href: "/kirana", label: "Kirana List", badge: "Mobile" },
-    { href: "/vendor", label: "Vendor Portal", badge: "Dock" },
+    { href: "/store", label: "Store Hub", badge: "Live Hub" },
+    { href: "/crates/AF-CRATE-0481", label: "RSL Prediction", badge: "Optical CV" },
+    { href: "/actions", label: "Action Center", badge: "Closed-Loop" },
+    { href: "/invisible-window", label: "Invisible Window", badge: "3D Timeline" },
+    { href: "/kirana", label: "Kirana Network", badge: "B2B Liquidation" },
+    { href: "/vendor", label: "Vendor Portal", badge: "Scorecard" },
   ];
 
   return (
@@ -95,7 +98,17 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* Right: Controls & Session Pill */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            {/* Judge Dossier Button */}
+            <button
+              onClick={() => setIsJudgeModalOpen(true)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-500/15 hover:bg-amber-500/25 text-amber-900 border border-amber-500/30 transition-all active:scale-95 shadow-sm"
+              title="Open IIT Bombay Techfest Evaluation Dossier"
+            >
+              <Award className="w-3.5 h-3.5 text-amber-600" />
+              <span className="hidden sm:inline">Judge Dossier</span>
+            </button>
+
             <button
               onClick={handleReset}
               disabled={isResetting}
@@ -158,6 +171,12 @@ export const Header: React.FC<HeaderProps> = ({
           })}
         </nav>
       </div>
+
+      {/* Techfest Judge Verification Modal */}
+      <TechfestJudgeModal
+        isOpen={isJudgeModalOpen}
+        onClose={() => setIsJudgeModalOpen(false)}
+      />
     </header>
   );
 };
