@@ -27,6 +27,7 @@ import {
   Sparkles,
   BadgeCheck
 } from "lucide-react";
+import { StoreSettingsModal } from "../../components/StoreSettingsModal";
 
 // Realistic 7 sample crates with canonical tomato at top
 const SAMPLE_CRATES = [
@@ -149,6 +150,7 @@ export default function StoreDashboardPage() {
   const [chillerAnomaly, setChillerAnomaly] = useState<boolean>(false);
   const [scanningCrateId, setScanningCrateId] = useState<string | null>(null);
   const [liveToast, setLiveToast] = useState<{ title: string; desc: string } | null>(null);
+  const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<string>("14:31:05 IST");
 
   useEffect(() => {
@@ -330,10 +332,13 @@ export default function StoreDashboardPage() {
               <span>Vendor</span>
             </Link>
 
-            <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14px] text-[#94A3B8] cursor-not-allowed">
-              <Settings strokeWidth={1.5} className="w-4 h-4 text-[#94A3B8]" />
-              <span>Settings (stub)</span>
-            </div>
+            <button
+              onClick={() => setIsSettingsOpen(true)}
+              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[14px] text-[#475569] hover:text-[#064E3B] hover:bg-[#F8FAFC] transition-colors text-left"
+            >
+              <Settings strokeWidth={1.5} className="w-4 h-4 text-[#059669]" />
+              <span>Store Settings</span>
+            </button>
           </nav>
         </div>
 
@@ -363,7 +368,14 @@ export default function StoreDashboardPage() {
             <span className="text-[#CBD5E1]">·</span>
             <span>Canonical: #AF-CRATE-0481</span>
           </div>
-          <div className="flex items-center gap-2 font-mono">
+          <div className="flex items-center gap-3 font-mono">
+            <button
+              onClick={() => setIsSettingsOpen(true)}
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-[#064E3B] bg-slate-50 hover:bg-[#D1FAE5] border border-[#CBD5E1] transition-all active:scale-95 shadow-2xs"
+            >
+              <Settings className="w-3.5 h-3.5 text-[#059669]" />
+              <span>Edge Config</span>
+            </button>
             <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#D1FAE5] text-[#064E3B] border border-[#10B981]/30">
               <span className="w-2 h-2 rounded-full bg-[#10B981] animate-ping" />
               <span>✓ Sensor verified · {currentTime}</span>
@@ -889,6 +901,18 @@ export default function StoreDashboardPage() {
           </button>
         </div>
       )}
+
+      {/* STORE SETTINGS MODAL */}
+      <StoreSettingsModal
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+        onSave={(s) =>
+          setLiveToast({
+            title: "✓ Edge Automation Config Saved",
+            desc: `Auto-fire threshold set to ≥${s.autoFireThreshold}% · CCTV RTSP gateway synchronized.`,
+          })
+        }
+      />
 
     </div>
   );
