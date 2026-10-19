@@ -25,7 +25,9 @@ import {
   Award,
   ChevronRight,
   Sparkles,
-  BadgeCheck
+  BadgeCheck,
+  Menu,
+  X
 } from "lucide-react";
 import { StoreSettingsModal } from "../../components/StoreSettingsModal";
 
@@ -151,6 +153,7 @@ export default function StoreDashboardPage() {
   const [scanningCrateId, setScanningCrateId] = useState<string | null>(null);
   const [liveToast, setLiveToast] = useState<{ title: string; desc: string } | null>(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<string>("14:31:05 IST");
 
   useEffect(() => {
@@ -275,8 +278,8 @@ export default function StoreDashboardPage() {
   return (
     <div className="min-h-screen flex bg-[#F8FAFC] text-[#475569] font-sans selection:bg-[#D1FAE5] selection:text-[#064E3B]">
       
-      {/* 1. SIDEBAR (240px, white surface, right-side hairline, soft right-edge shadow) */}
-      <aside className="w-[240px] flex-shrink-0 bg-white border-r border-[#E2E8F0] shadow-[4px_0_24px_rgba(6,78,59,0.02)] flex flex-col justify-between p-4 sticky top-0 h-screen">
+      {/* 1. DESKTOP SIDEBAR (hidden on mobile/tablet <lg, 240px on lg+) */}
+      <aside className="hidden lg:flex w-[240px] flex-shrink-0 bg-white border-r border-[#E2E8F0] shadow-[4px_0_24px_rgba(6,78,59,0.02)] flex-col justify-between p-4 sticky top-0 h-screen">
         <div>
           {/* Logo at top */}
           <Link href="/" className="flex items-center gap-2.5 px-2 py-3 mb-6">
@@ -359,16 +362,122 @@ export default function StoreDashboardPage() {
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
         
+        {/* MOBILE HEADER (lg:hidden) */}
+        <div className="lg:hidden sticky top-0 z-40 bg-white border-b border-[#E2E8F0] px-4 py-3 flex items-center justify-between shadow-2xs">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#059669] to-[#10B981] flex items-center justify-center shadow-xs">
+              <Eye strokeWidth={1.5} className="w-3.5 h-3.5 text-white" />
+            </div>
+            <span className="text-base font-bold tracking-tight text-[#064E3B]">
+              Aura<span className="text-[#059669]">Fresh</span>
+            </span>
+            <span className="text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 ml-1">
+              #STORE-BLR-014
+            </span>
+          </Link>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsSettingsOpen(true)}
+              aria-label="Settings"
+              className="p-1.5 rounded-lg text-[#064E3B] bg-slate-50 border border-[#CBD5E1] hover:bg-[#D1FAE5] transition-colors"
+            >
+              <Settings strokeWidth={1.5} className="w-4 h-4 text-[#059669]" />
+            </button>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle navigation menu"
+              className="p-1.5 rounded-lg text-[#064E3B] bg-[#D1FAE5] hover:bg-[#A7F3D0] transition-colors"
+            >
+              {isMobileMenuOpen ? <X className="w-5 h-5 text-[#064E3B]" /> : <Menu className="w-5 h-5 text-[#064E3B]" />}
+            </button>
+          </div>
+        </div>
+
+        {/* MOBILE DRAWER NAVIGATION MENU */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden bg-white border-b border-[#CBD5E1] px-4 py-3 space-y-2 shadow-lg animate-in slide-in-from-top-2 duration-200">
+            <nav className="space-y-1">
+              <Link
+                href="/store"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-[#064E3B] bg-[#D1FAE5]"
+              >
+                <Store strokeWidth={1.5} className="w-4 h-4 text-[#059669]" />
+                <span>Store Hub</span>
+              </Link>
+              <Link
+                href="/crates/AF-CRATE-0481"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-[#475569] hover:bg-slate-50"
+              >
+                <Layers strokeWidth={1.5} className="w-4 h-4 text-[#475569]" />
+                <span>Crates (AF-CRATE-0481)</span>
+              </Link>
+              <Link
+                href="/actions"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-[#475569] hover:bg-slate-50"
+              >
+                <Zap strokeWidth={1.5} className="w-4 h-4 text-[#475569]" />
+                <span>Action Center</span>
+              </Link>
+              <Link
+                href="/invisible-window"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-[#475569] hover:bg-slate-50"
+              >
+                <Clock strokeWidth={1.5} className="w-4 h-4 text-[#475569]" />
+                <span>Invisible Decay Window</span>
+              </Link>
+              <Link
+                href="/kirana"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-[#475569] hover:bg-slate-50"
+              >
+                <Smartphone strokeWidth={1.5} className="w-4 h-4 text-[#475569]" />
+                <span>Kirana Network</span>
+              </Link>
+              <Link
+                href="/vendor"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-[#475569] hover:bg-slate-50"
+              >
+                <Truck strokeWidth={1.5} className="w-4 h-4 text-[#475569]" />
+                <span>Vendor Portal</span>
+              </Link>
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsSettingsOpen(true);
+                }}
+                className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-[#064E3B] bg-slate-50 hover:bg-[#D1FAE5] text-left font-medium"
+              >
+                <Settings strokeWidth={1.5} className="w-4 h-4 text-[#059669]" />
+                <span>Edge Automation Config</span>
+              </button>
+            </nav>
+            <div className="pt-2 border-t border-[#E2E8F0] flex items-center justify-between text-xs text-[#475569]">
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-full bg-[#D1FAE5] text-[#064E3B] font-bold text-[10px] flex items-center justify-center">
+                  PR
+                </div>
+                <span>Priya R. · DMart BLR-014</span>
+              </div>
+              <span className="text-[11px] font-mono text-[#059669]">{currentTime}</span>
+            </div>
+          </div>
+        )}
+        
         {/* TOP BAR / BREADCRUMB */}
-        <div className="px-8 py-3.5 bg-white border-b border-[#E2E8F0] flex items-center justify-between text-xs">
-          <div className="flex items-center gap-2 font-mono text-[#475569]">
+        <div className="px-4 sm:px-6 lg:px-8 py-2.5 sm:py-3.5 bg-white border-b border-[#E2E8F0] flex flex-wrap items-center justify-between gap-2 text-xs">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 font-mono text-[#475569]">
             <span className="text-[#064E3B] font-semibold">Store Dashboard</span>
             <span>/</span>
             <span className="text-[#064E3B] font-bold">#STORE-BLR-014</span>
             <span className="text-[#CBD5E1]">·</span>
-            <span>Canonical: #AF-CRATE-0481</span>
+            <span className="hidden sm:inline">Canonical: #AF-CRATE-0481</span>
           </div>
-          <div className="flex items-center gap-3 font-mono">
+          <div className="flex items-center gap-2 sm:gap-3 font-mono">
             <button
               onClick={() => setIsSettingsOpen(true)}
               className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold text-[#064E3B] bg-slate-50 hover:bg-[#D1FAE5] border border-[#CBD5E1] transition-all active:scale-95 shadow-2xs"
@@ -376,26 +485,26 @@ export default function StoreDashboardPage() {
               <Settings className="w-3.5 h-3.5 text-[#059669]" />
               <span>Edge Config</span>
             </button>
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#D1FAE5] text-[#064E3B] border border-[#10B981]/30">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-semibold bg-[#D1FAE5] text-[#064E3B] border border-[#10B981]/30">
               <span className="w-2 h-2 rounded-full bg-[#10B981] animate-ping" />
               <span>✓ Sensor verified · {currentTime}</span>
             </span>
           </div>
         </div>
 
-        <div className="p-8 space-y-8 flex-1">
+        <div className="p-4 sm:p-6 lg:p-8 space-y-6 lg:space-y-8 flex-1">
           {/* 2. TOP STRIP — Greeting + 3 stat tiles */}
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
               <div>
-                <h1 className="text-[28px] font-serif font-bold text-[#064E3B] tracking-tight">
+                <h1 className="text-xl sm:text-2xl lg:text-[28px] font-serif font-bold text-[#064E3B] tracking-tight">
                   Good afternoon, Priya
                 </h1>
                 <p className="text-xs text-[#475569] mt-0.5">
                   DMart BLR-014 Produce Aisle · Edge AI Vision Rig Active
                 </p>
               </div>
-              <div className="text-xs font-mono text-[#475569] flex items-center gap-2">
+              <div className="text-xs font-mono text-[#475569] flex flex-wrap items-center gap-2">
                 <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
                   Live SSE Pipeline Active
@@ -405,7 +514,7 @@ export default function StoreDashboardPage() {
             </div>
 
             {/* Three stat tiles (white surface, 1px hairline, 8px radius, soft shadow) */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
               <div className="p-4 bg-white border border-[#E2E8F0] rounded-lg shadow-[0_4px_16px_rgba(6,78,59,0.04)] flex items-center justify-between transition-all hover:border-[#10B981]/50">
                 <div>
                   <div className="text-xs text-[#475569] font-medium">Actions Executed</div>
@@ -545,7 +654,7 @@ export default function StoreDashboardPage() {
           <div className="flex flex-col xl:flex-row gap-6 items-start">
             
             {/* 4. CRATE TABLE */}
-            <div className="flex-1 w-full bg-white border border-[#E2E8F0] rounded-lg shadow-sm p-6">
+            <div className="flex-1 w-full bg-white border border-[#E2E8F0] rounded-lg shadow-sm p-3.5 sm:p-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#E2E8F0]">
                 <div>
                   <h2 className="text-base font-bold text-[#064E3B]">
@@ -557,15 +666,15 @@ export default function StoreDashboardPage() {
                 </div>
 
                 {/* Filter Pills & Search Input */}
-                <div className="flex flex-wrap items-center gap-2">
-                  <div className="relative">
+                <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+                  <div className="relative flex-1 sm:flex-initial">
                     <Search className="w-3.5 h-3.5 text-[#94A3B8] absolute left-2.5 top-2.5" />
                     <input
                       type="text"
                       placeholder="Search produce or ID..."
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
-                      className="pl-8 pr-3 py-1.5 text-xs bg-[#F8FAFC] border border-[#E2E8F0] rounded-md focus:outline-none focus:border-[#059669] w-48"
+                      className="pl-8 pr-3 py-1.5 text-xs bg-[#F8FAFC] border border-[#E2E8F0] rounded-md focus:outline-none focus:border-[#059669] w-full sm:w-48"
                     />
                   </div>
 
@@ -872,7 +981,7 @@ export default function StoreDashboardPage() {
         </div>
 
         {/* PRIVACY FOOTER (full-width, hairline-top) */}
-        <footer className="w-full border-t border-[#E2E8F0] bg-white py-3 px-8 mt-auto">
+        <footer className="w-full border-t border-[#E2E8F0] bg-white py-3 px-4 sm:px-8 mt-auto">
           <div className="flex items-center justify-center gap-2 text-center">
             <span className="font-mono text-[11px] text-[#475569]">
               🔒 only numbers leave the store · no video, no faces · 48-hr onboarding · scales to 10,000+ stores
